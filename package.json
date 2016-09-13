@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/krozzwu/oscikeys/issues"
   },
-  "homepage": "https://github.com/krozzwu/oscikeys#readme"
+  "homepage": "https://github.com/krozzwu/oscikeys#readme",
+  "devDependencies": {
+    "eslint": "^3.5.0",
+    "eslint-config-standard": "^6.0.0",
+    "eslint-plugin-promise": "^2.0.1",
+    "eslint-plugin-standard": "^2.0.0"
+  }
 }

@@ -1,76 +1,35 @@
 /* Oscillator */
 console.log('init oscillator');
 
-var Oscillator = function (config) {
+// init audio context
+var audioContext = new AudioContext();
 
-    this.config = {};
+var Oscillator = (function (config) {
 
-    this.start = function () {
-        console.log(this);
+    if (config !== undefined) {
+        this.oscConfig = config;
+    }
 
-        var audioContext = new AudioContext();
-        var oscillator = audioContext.createOscillator();
-        var oscillatorGain = audioContext.createGain();
-        // var oscConfig = {};
+    this.oscNode = audioContext.createOscillator();
+    this.oscGain = audioContext.createGain();
+    this.oscNode.type = this.oscConfig.type;
+    this.oscNode.frequency.value = this.oscConfig.freq;
+    this.oscGain.gain.value = '0';
+    this.oscNode.connect(this.oscGain);
+    this.oscGain.connect(audioContext.destination);
+    this.oscNode.start();
 
-        // if custom config value exist, take it
-        if (config !== undefined) {
-            this.config = config;
-        }
-
-        if (this.config.type !== undefined) {
-            oscillator.type = this.config.type;
-        } else {
-            oscillator.type = 'sine';
-        }
-
-        if (this.config.frequency !== undefined) {
-            oscillator.frequency.value = this.config.frequency;
-        } else {
-            oscillator.frequency.value = 440;
-        }
-
-        if (this.config.volume !== undefined) {
-            oscillatorGain.gain.value = this.config.volume;
-        } else {
-            oscillatorGain.gain.value = 0;
-        }
-
-        oscillator.connect(oscillatorGain);
-        oscillatorGain.connect(audioContext.destination);
-
-        oscillator.start();
+    this.noteOn = function () {
+        console.log('osc start');
+        this.oscGain.gain.value = '0.1';
     };
-
-};
-
-// var myOsc = new Oscillator();
-
-
-var myOsc = new Oscillator({
-    type: 'sine',
-    frequency: '440',
-    volume: '0.1'
 });
 
-// var myOsc2 = new Oscillator({
-//     type: 'square',
-//     frequency: '330',
-//     volume: '0.1'
-// });
+var zKey = new Oscillator({
+    type: 'sine',
+    freq: '440'
+});
 
 
+// zKey.noteOn();
 
-myOsc.start();
-
-// myOsc2.start();
-
-
-
-
-
-// Oscillator({
-//     type: 'sine',
-//     frequency: '660',
-//     volume: '0.1'
-// });
