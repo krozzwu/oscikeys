@@ -23,13 +23,33 @@ var Oscillator = (function (config) {
         console.log('osc start');
         this.oscGain.gain.value = '0.1';
     };
+
+    this.noteOff = function () {
+        this.oscGain.gain.value = '0';
+    };
 });
 
-var zKey = new Oscillator({
-    type: 'sine',
-    freq: '440'
-});
 
 
-// zKey.noteOn();
+var range = [
+    {z: '440'},
+    {x: '660'}
+];
+
+var generateKeyRange = function () {
+    for (var i = 0; i < range.length; i++) {
+        for (var key in range[i]) {
+            console.log(range[i][key]);
+            range[i] = new Oscillator({
+                type: 'sine',
+                freq: range[i][key]
+            });
+        }
+    }
+};
+
+generateKeyRange();
+
+// do "range[0].noteOn()"
+
 
