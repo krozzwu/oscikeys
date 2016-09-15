@@ -31,25 +31,21 @@ var Oscillator = (function (config) {
 
 
 
-var range = [
-    {z: '440'},
-    {x: '660'}
-];
 
-var generateKeyRange = function () {
-    for (var i = 0; i < range.length; i++) {
-        for (var key in range[i]) {
-            console.log(range[i][key]);
-            range[i] = new Oscillator({
-                type: 'sine',
-                freq: range[i][key]
-            });
-        }
-    }
+var range = {
+    z: '440',
+    x: '660',
+    c: '880'
 };
 
-generateKeyRange();
-
-// do "range[0].noteOn()"
 
 
+for (var item in range) {
+    if (range.hasOwnProperty(item)) {
+        range[item] = new Oscillator({
+            type: 'sine',
+            freq: range[item]
+        });
+
+    }
+}
