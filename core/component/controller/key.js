@@ -1,34 +1,22 @@
 // key event
 console.log('key init');
 
-var keyOn = (function () {
-    var keypress = function () {
+var keyOn = function (keyAction, noteAction) {
+    var innerFunc = function () {
         for (var item in range) {
             if (event.key === item) {
                 console.log('press:' + event.key + ' get: ' + item);
-                range[item].noteOn();
+                if (noteAction === 'noteOn') {
+                    range[item].noteOn();
+                } else if (noteAction === 'noteOff') {
+                    range[item].noteOff();
+                }
             }
         }
     };
-    var keydown = function () {
-        for (var item in range) {
-            if (event.key === item) {
-                console.log('press:' + event.key + ' get: ' + item);
-                range[item].noteOn();
-            }
-        }
-    };
-    var keyup = function () {
-        for (var item in range) {
-            if (event.key === item) {
-                console.log('press:' + event.key + ' get: ' + item);
-                range[item].noteOff();
-            }
-        }
-    };
-    document.addEventListener('keypress', keypress);
-    document.addEventListener('keydown', keydown);
-    document.addEventListener('keyup', keyup);
+    document.addEventListener(keyAction, innerFunc);
+};
 
-});
-keyOn();
+keyOn('keypress', 'noteOn');
+keyOn('keydown', 'noteOn');
+keyOn('keyup', 'noteOff');

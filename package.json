@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/krozzwu/oscikeys#readme",
   "devDependencies": {
+    "babel-cli": "^6.14.0",
     "eslint": "^3.5.0",
     "eslint-config-standard": "^6.0.0",
     "eslint-plugin-promise": "^2.0.1",
