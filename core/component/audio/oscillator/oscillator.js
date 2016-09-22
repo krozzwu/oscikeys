@@ -29,12 +29,10 @@ var Oscillator = (function (config) {
     this.oscNode.frequency.value = this.oscConfig.freq;
     this.oscGain.gain.value = '0';
     this.oscNode.connect(this.oscGain);
-    // this.oscGain.connect(audioContext.destination);
     var outputGain = new  MasterGain();
     console.log(outputGain.gainNode.gain.value);
     this.oscGain.connect(outputGain.gainNode);
     outputGain.gainNode.connect(audioContext.destination);
-    // masterGain().connect(audioContext.destination);
     this.oscNode.start();
 
     this.noteOn = function () {
@@ -48,24 +46,21 @@ var Oscillator = (function (config) {
 
 
 
-
-
-
-
 var range = {
     z: '440',
     x: '660',
     c: '880'
 };
 
-
-
-for (var item in range) {
-    if (range.hasOwnProperty(item)) {
-        range[item] = new Oscillator({
-            type: 'sine',
-            freq: range[item]
-        });
-
+var oscGenerator = function (oscType) {
+    for (var item in range) {
+        if (range.hasOwnProperty(item)) {
+            range[item] = new Oscillator({
+                type: oscType,
+                freq: range[item]
+            });
+        }
     }
-}
+};
+
+oscGenerator('sine');
