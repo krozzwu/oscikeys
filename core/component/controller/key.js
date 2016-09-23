@@ -1,5 +1,5 @@
 // key event
-console.log('key init');
+console.log('||||||||||| KEYBOARD EVENT READY |||||||||||');
 
 var keyOn = function (keyAction, noteAction) {
     var innerFunc = function () {
