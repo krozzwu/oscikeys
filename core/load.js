@@ -7,6 +7,6 @@ var include = function (path) {
 };
 
 include('core/component/audio/oscillator/oscillator.js');
-include('core/component/controller/midi.js');
+include('core/component/controller/key.js');
 include('core/component/controller/key.js');
 include('core/component/ui/fader/fader.js');
